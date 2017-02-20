@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (start.getText().equals("Start")) {
                     String message = getMessage();
-                    String phoneNumber = getPhone();
+                    String number = getPhone();
                     String minutes = ((EditText) findViewById(R.id.minutes)).getEditableText().toString();
                     int minutesApart;
                     try {
@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
                     } catch (NumberFormatException nfe) {
                         minutesApart = 0;
                     }
-                    if (minutesApart > 0 && !message.isEmpty() && !phoneNumber.isEmpty()
-                            && phoneNumber.matches("[(]\\d{3}[)][ ]\\d{3}-\\d{4}")) {
+                    if (minutesApart > 0 && !message.isEmpty() && !number.isEmpty()
+                            && number.matches("[(]\\d{3}[)][ ]\\d{3}-\\d{4}")) {
                         alarmIntent.putExtra("message", message);
-                        alarmIntent.putExtra("number", phoneNumber);
+                        alarmIntent.putExtra("number", number);
                         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
                         start.setText("Stop");
                         startAlarm(minutesApart);
@@ -56,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
 
                         }
-                        if (phoneNumber.isEmpty()) {
+                        if (number.isEmpty()) {
                             Toast.makeText(getApplicationContext(), "Phone number cannot be empty.",
                                     Toast.LENGTH_SHORT).show();
 
                         }
-                        if (!phoneNumber.matches("[(]\\d{3}[)][ ]\\d{3}-\\d{4}")) {
+                        if (!number.matches("[(]\\d{3}[)][ ]\\d{3}-\\d{4}")) {
                             Toast.makeText(getApplicationContext(), "Phone number format must be (555) 555-5555",
                                     Toast.LENGTH_SHORT).show();
 
